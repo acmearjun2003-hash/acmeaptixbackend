@@ -7,21 +7,20 @@ use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
-    
+
     public function index(Request $request)
     {
-        $students = Student::select('name','id')->get();
-        if(!empty($students))
-        {
+        $students = Student::select('name', 'id')->get();
+
+        if (!empty($students)) {
             return response()->json([
-                'status'=> true,
+                'status' => true,
                 'message' => 'student data found',
                 'data' => $students
             ]);
-        }
-        else{
+        } else {
             return response()->json([
-                'status'=> false,
+                'status' => false,
                 'message' => 'no data found'
             ]);
         }

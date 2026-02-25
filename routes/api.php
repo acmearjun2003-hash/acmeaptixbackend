@@ -8,6 +8,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 
 /*
@@ -34,9 +35,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 */
 
 // ── Roles ────────────────────────────────────────────────────────────────
+Route::get('/roles/dropdown', [RoleController::class, 'fetchUniqueRoles'])
+     ->name('selectDropdownRoles');
 Route::apiResource('roles', RoleController::class);
 
+
 // ── Posts (Job Openings) ─────────────────────────────────────────────────
+
+Route::get('/posts/dropdown',[PostController::class,'fetchUniquePosts'])->name('selectDropdownPosts');
 Route::apiResource('posts', PostController::class);
 
 // ── Question Bank ────────────────────────────────────────────────────────
@@ -57,17 +63,9 @@ Route::put('exam-details/{id}',       [ExamDetailController::class, 'update']);
 Route::get('candidates/{candidateId}/exam-details', [ExamDetailController::class, 'byCandidate']);
 
 
+Route::apiResource('users', UserController::class);
 
-// Protected routes
-
-Route::get   ('users',        [\App\Http\Controllers\UserController::class, 'index'] );
-Route::post  ('users',        [\App\Http\Controllers\UserController::class, 'store'] )->name('users.store');
-Route::get   ('users/create', [\App\Http\Controllers\UserController::class, 'create']);
-Route::get   ('users/{id}',   [\App\Http\Controllers\UserController::class, 'show']  );
-Route::get   ('users/{id}/edit', [\App\Http\Controllers\UserController::class, 'edit']);
-Route::put   ('users/{id}',   [\App\Http\Controllers\UserController::class, 'update'])->name('users.update');
-Route::delete('users/{id}',   [\App\Http\Controllers\UserController::class, 'destroy']);
-
+// Route::patch('users/{user}/exam-results', [UserController::class, 'updateExamResults']);
 
 Route::post('/student',[StudentController::class,'index']);
 

@@ -18,6 +18,13 @@ class RoleController extends Controller
         return response()->json($roles);
     }
 
+    public function fetchUniqueRoles()
+    {
+        $roles = Role::distinct()           // or ->groupBy() / ->pluck()
+            ->pluck('id','display_name');       // or 'display_name', 'slug' etc.
+
+        return response()->json($roles);
+    }
     /**
      * POST /roles
      * Create a new role.

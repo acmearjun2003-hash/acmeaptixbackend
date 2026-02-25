@@ -21,6 +21,12 @@ class PostController extends Controller
 
         return response()->json($query->get());
     }
+    public function fetchUniquePosts()
+    {
+        $posts = Post::distinct()           // or ->groupBy() / ->pluck()
+            ->pluck('post_id','post_name')   ;     // or 'display_name', 'slug' etc.
+        return response()->json($posts);
+    }
 
     /**
      * POST /posts
