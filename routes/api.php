@@ -62,6 +62,8 @@ Route::get('exam-details/{id}',       [ExamDetailController::class, 'show']);
 Route::put('exam-details/{id}',       [ExamDetailController::class, 'update']);
 Route::get('candidates/{candidateId}/exam-details', [ExamDetailController::class, 'byCandidate']);
 
+// Route::get('users/filter-count', [UserController::class, 'filterCount'])
+//     ->name('users.filter-count');
 
 Route::apiResource('users', UserController::class);
 

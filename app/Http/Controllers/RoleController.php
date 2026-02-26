@@ -14,7 +14,6 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::withCount('users')->get();
-
         return response()->json($roles);
     }
 
@@ -47,7 +46,7 @@ class RoleController extends Controller
      */
     public function show(int $id)
     {
-        $role = Role::with('users')->findOrFail($id);
+        $role = Role::withCount('users')->findOrFail($id);
 
         return response()->json($role);
     }
