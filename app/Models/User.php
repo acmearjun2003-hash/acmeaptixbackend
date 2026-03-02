@@ -16,7 +16,7 @@ class User extends \TCG\Voyager\Models\User
         'role_id', 'name', 'email', 'mobileno', 'password',
         'highestquali', 'ssc', 'hsc', 'diploma', 'degree',
         'masterdegree', 'aptiscore', 'referenceby', 'post',
-        'techroundpercent', 'interviewpercent',
+        'techroundpercent', 'interviewpercent','document'
     ];
 
     protected $hidden = ['password', 'remember_token'];

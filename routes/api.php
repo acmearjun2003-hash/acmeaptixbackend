@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\CustomerMasterController;
+use App\Http\Controllers\EncCustomerMasterController;
 use App\Http\Controllers\ExamDetailController;
 use App\Http\Controllers\ExamMasterController;
+use App\Http\Controllers\OcfMasterController;
+use App\Http\Controllers\OcfMasterController as HttpControllersOcfMasterController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\QuestionBankController;
 use App\Http\Controllers\RoleController;
@@ -34,6 +38,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 |--------------------------------------------------------------------------
 */
 
+// Route::get('users/filter-count', [UserController::class, 'filterCount'])
+//     ->name('users.filter-count');
+// Route::patch('users/{user}/exam-results', [UserController::class, 'updateExamResults']);
+
+
 // ── Roles ────────────────────────────────────────────────────────────────
 Route::get('/roles/dropdown', [RoleController::class, 'fetchUniqueRoles'])
      ->name('selectDropdownRoles');
@@ -62,13 +71,19 @@ Route::get('exam-details/{id}',       [ExamDetailController::class, 'show']);
 Route::put('exam-details/{id}',       [ExamDetailController::class, 'update']);
 Route::get('candidates/{candidateId}/exam-details', [ExamDetailController::class, 'byCandidate']);
 
-// Route::get('users/filter-count', [UserController::class, 'filterCount'])
-//     ->name('users.filter-count');
 
 Route::apiResource('users', UserController::class);
 
-// Route::patch('users/{user}/exam-results', [UserController::class, 'updateExamResults']);
-
 Route::post('/student',[StudentController::class,'index']);
 
+Route::get('/customers/dropdowns/customertypes', [CustomerMasterController::class, 'getCustomerTypes']);
+Route::get('/customers/dropdowns/packagetypes', [CustomerMasterController::class, 'getPackageTypes']);
+
+Route::get('/customers', [CustomerMasterController::class, 'index']);
+
+
+Route::post('/erp-customers', [EncCustomerMasterController::class, 'index']);
+Route::post('/ocf-master', [OcfMasterController::class, 'index'])->name('fetch_ocf_customers');
+// Route::post('/ocf/chunck', [OcfMasterController::class, 'chunkFetch']);
+// Route::post('/ocf', [OcfMasterController::class, 'fetchData']);
 

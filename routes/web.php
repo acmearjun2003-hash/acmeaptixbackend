@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use TCG\Voyager\Facades\Voyager;
+use App\Http\Controllers\CustomerMasterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,5 +17,10 @@ use TCG\Voyager\Facades\Voyager;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/customers', [CustomerMasterController::class, 'indexPage']);
+Route::get('/ocf', function(){
+    return view('ocf-table');
 });
 
